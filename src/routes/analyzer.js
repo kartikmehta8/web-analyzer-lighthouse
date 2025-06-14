@@ -1,5 +1,4 @@
 const express = require('express');
-const { default: lighthouse } = require('lighthouse');
 const puppeteer = require('puppeteer');
 
 const router = express.Router();
@@ -8,6 +7,8 @@ router.post('/', async (req, res) => {
   const { url } = req.body;
   try {
     const browser = await puppeteer.launch({ headless: 'new', args: ['--remote-debugging-port=9222'] });
+    const endpoint = browser.wsEndpoint();
+    const lighthouse = (await import('lighthouse')).default;
     const report = await lighthouse(url, {
       port: 9222,
       output: 'html',
