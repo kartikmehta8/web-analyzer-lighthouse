@@ -6,7 +6,11 @@ const router = express.Router();
 router.post('/', async (req, res) => {
   const { url } = req.body;
   try {
-    const browser = await puppeteer.launch({ headless: 'new', args: ['--remote-debugging-port=9222'] });
+    const browser = await puppeteer.launch({
+      headless: 'new',
+      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/chromium-browser',
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--remote-debugging-port=9222'],
+    });    
     const endpoint = browser.wsEndpoint();
     const lighthouse = (await import('lighthouse')).default;
     const report = await lighthouse(url, {
