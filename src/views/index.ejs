@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lighthouse Analyzer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css">
+  <link rel="stylesheet" href="/styles.css">
+  <script>
+    function showLoader() {
+      document.getElementById('loader').style.display = 'flex';
+    }
+  </script>
+</head>
+<body>
+  <div id="loader" class="loader-overlay">
+    <div class="loader"></div>
+  </div>
+  <div class="container" style="margin-top: 5rem;">
+    <h2 class="text-center">Website Performance Analyzer</h2>
+    <form action="/analyze" method="POST" onsubmit="showLoader()">
+      <fieldset>
+        <p>Enter a URL to analyze:</p>
+        <input type="url" name="url" id="url" placeholder="https://www.tailwine.in" required>
+        <input type="submit" class="button-primary" value="Analyze">
+      </fieldset>
+    </form>
+  </div>
+  <footer style="text-align: center; margin-top: 3rem;">
+    <p>Made by <a href="https://www.mrmehta.in" target="_blank">Kartik Mehta</a></p>
+  </footer>
+</body>
+</html>
